@@ -1,0 +1,341 @@
+add_action( 'template_redirect', 'prefix_remove_template_redirect', 10, 2);
+function prefix_remove_template_redirect(){
+  ob_start( function( $buffer ){
+    $buffer = str_replace( array( 
+        '<script type="text/javascript">',
+        "<script type='text/javascript'>", 
+        "<script type='text/javascript' src=",
+        '<script type="text/javascript" src=',
+        '<style type="text/css">', 
+        "' type='text/css' media=", 
+        '<style type="text/css" media',
+        "' type='text/css'>"
+    ), 
+    array(
+        '<script>', 
+        "<script>", 
+        "<script src=",
+        '<script src=',
+        '<style>', 
+        "' media=", 
+        '<style media',
+        "' >"
+    ), $buffer );
+
+    return $buffer;
+  });
+};
+
+
+
+
+============================================================================
+===================Remove w3c validator error===============================
+============================================================================
+add_action( 'template_redirect', 'prefix_remove_template_redirect', 10, 2);
+function prefix_remove_template_redirect(){
+  ob_start( function( $buffer ){
+    $buffer = str_replace( array( 
+        '<script type="text/javascript">',
+        "<script type='text/javascript'>", 
+        "<script type='text/javascript' src=",
+        '<script type="text/javascript" src=',
+        '<style type="text/css">', 
+        "' type='text/css' media=", 
+        '<style type="text/css" media'
+    ), 
+    array(
+        '<script>', 
+        "<script>", 
+        "<script src=",
+        '<script src=',
+        '<style>', 
+        "' media=", 
+        '<style media',
+        "' >"
+    ), $buffer );
+    return $buffer;
+  });
+};
+
+add_filter('script_loader_tag', 'clean_script_tag');
+  function clean_script_tag($input) {
+  $input = str_replace("type='text/javascript' ", '', $input);
+  $input = str_replace('height="auto"', '', $input);
+  $input = str_replace('width="auto"', '', $input);
+  return str_replace("'", '"', $input);
+}
+
+
+
+
+=======================================================
+=============Remove type script error==================
+=======================================================
+
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
+add_action( 'template_redirect', 'wcerr_typeno_error' );
+
+function wcerr_typeno_error(){
+    ob_start( function( $validator ){
+        $validator = str_replace( array( 'type="text/javascript"', 'type="application/javascript"', "type='text/javascript'" ), '', $validator );
+        
+        // Also works with other attributes...
+        $validator = str_replace( array( 'type="text/css"', "type='text/css'" ), '', $validator );
+        $validator = str_replace( array( 'frameborder="0"', "frameborder='0'" ), '', $validator );
+        $validator = str_replace( array( 'scrolling="no"', "scrolling='no'" ), '', $validator );
+        
+        return $validator;
+    });
+}
+
+
+
+==============================================
+=============fix font preloader===============
+==============================================
+// Preload key requests
+function font_preload() {
+    echo '<link rel="preload" href="/wp-content/themes/abbeytent/fonts/BemboStd.ttf" as="font" crossorigin="anonymous">
+<link rel="preload" href="/wp-content/themes/abbeytent/fonts/BemboStd.ttf" as="font" crossorigin="anonymous">';
+
+echo '<link rel="preload" href="/wp-content/themes/abbeytent/fonts/TrajanPro-Regular.ttf" as="font" crossorigin="anonymous">
+<link rel="preload" href="/wp-content/themes/abbeytent/fonts/TrajanPro-Regular.ttf" as="font" crossorigin="anonymous">';
+
+echo '<link rel="preload" href="/wp-content/themes/abbeytent/fonts/BemboStd-Bold.ttf" as="font" crossorigin="anonymous">
+<link rel="preload" href="/wp-content/themes/abbeytent/fonts/BemboStd-Bold.ttf" as="font" crossorigin="anonymous">';
+
+echo '<link rel="preload" href="/wp-content/plugins/atomic-blocks/dist/assets/fontawesome/webfonts/fa-brands-400.woff2" as="font" crossorigin="anonymous">
+<link rel="preload" href="/wp-content/plugins/atomic-blocks/dist/assets/fontawesome/webfonts/fa-brands-400.woff2" as="font" crossorigin="anonymous">';
+
+echo '<link rel="preload" href="/wp-content/themes/abbeytent/fonts/Bellany.ttf" as="font" crossorigin="anonymous">
+<link rel="preload" href="/wp-content/themes/abbeytent/fonts/Bellany.ttf" as="font" crossorigin="anonymous">';
+
+echo '<link rel="preload" href="/wp-content/plugins/revslider/public/assets/fonts/revicons/revicons.woff?5510888" as="font" crossorigin="anonymous">
+<link rel="preload" href="/wp-content/plugins/revslider/public/assets/fonts/revicons/revicons.woff?5510888" as="font" crossorigin="anonymous">';
+}
+
+add_action('wp_head', 'font_preload', 0);
+========================================================
+=================Amp Redirect===========================
+========================================================
+<script>
+  if (jQuery(window).width() < 600) {
+  var pageURL = jQuery(location).attr("href");
+  var urlss = pageURL+'amp'
+  window.location.href = urlss;
+  }
+</script>
+
+
+
+=========================================================
+=================Change text with jquery=================
+=========================================================
+change text 
+jQuery(document).ready(function(){
+	jQuery("#tab-title-additional_information a").each(function() {
+    var text = jQuery(this).html();
+    text = text.replace("Additional information", "Specs Sheets");
+    jQuery(this).html(text);
+});
+
+
+
+=========================================================
+================create owl carasual======================
+=========================================================
+function prodect_categories_slider() { 
+	ob_start();
+	?>
+
+	<link rel="stylesheet" type="text/css" href="">
+	<link rel="stylesheet" type="text/css" href="">
+	<script type="text/javascript" src=""></script>
+	<script type="text/javascript" src=""></script>
+
+	<div id="banner-carousel" class="carousel slide banner-slider" data-ride="carousel">	
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner owl-carousel" role="listbox">
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+			<div class="item">
+			    <h1>Mr. David Low</h1>
+			</div>
+		</div>
+	</div>
+	<script>
+		var owl = jQuery('.banner-slider .owl-carousel');
+		  owl.owlCarousel({
+		    nav: true,
+		    dots: false,
+		    loop: true,
+		    autoplay:false,
+		    autoplayTimeout:2000,
+		    autoplayHoverPause:true,
+		    responsive: {
+		      0: {
+		        items: 1
+		      },
+		      600: {
+		        items: 1
+		      },
+		      768: {
+		        items:2
+		      },
+		      800:{
+		        items: 3
+		      },
+		      1000: {
+		        items: 3
+		      },
+		      1024:{
+		        items: 4
+		      },
+		      1300: {
+		        items: 4
+		      }
+		    }
+		  });
+	</script>
+<?php 
+return ob_get_clean();
+}
+add_shortcode( 'prodect_categories_slider', 'prodect_categories_slider' );
+
+
+
+=========================================================================
+=================Navigation bar========================
+==========================================================================
+
+
+<div class="amp-header-main">
+  <div class="container">
+    <div class="amp-header-section">
+      <div class="amp_headerbar_main">
+        <div class="amp_headerbar">
+          <div role="button" tabindex="0" on="tap:sidebar1.toggle" class="hamburger"><i class="fas fa-bars"></i></div>
+        </div><!-- .amp_headerbar -->
+        <amp-sidebar id="sidebar1" layout="nodisplay" side="left">
+          <div role="button" aria-label="close sidebar" on="tap:sidebar1.toggle" tabindex="0" class="close-sidebar">✕</div>
+          <div class="amp_sidebar">
+            <?php
+            wp_nav_menu( array(
+              'theme_location' => 'amp_menu',
+              'menu_id'        => 'menu',
+            ) );
+            ?>
+          </div>
+      </amp-sidebar><!-- #sidebar1 -->
+      </div><!-- .amp_headerbar_main -->
+      <div class="center-logo">
+        <a href="/"><img src="/wp-content/uploads/2020/05/header-logo.png" class="main-center-logo" alt="amp-header-logo"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+=============================
+=======Toggle Jquery=========
+=============================
+<script>
+jQuery(document).ready(function(){
+jQuery('.reff_forms_button').click(function(){
+jQuery('.refferal_form').css('display','block');
+jQuery('.toggle_display').css('display','none');
+});
+jQuery('.refree_form').click(function(){
+jQuery('.refferal_form').css('display','none');
+jQuery('.toggle_display').css('display','block');
+});
+});
+</script>
+
+
+
+
+=============================
+=======Hide other class Jquery=========
+=============================
+	jQuery(document).on("submit",'#gform_3',function(){
+    jQuery('.steeping').hide();			
+	});	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.batteriesinc.optfirst.org/wp-content/cache/autoptimize/js/autoptimize_d470440bdf93f3123f5b17b9f332a623.js
+https://widget.privy.com/assets/widget.js
+https://connect.facebook.net/signals/config/434971797222082?v=2.9.41&r=stable
+https://www.googletagmanager.com/gtm.js?id=GTM-TH9CC2
